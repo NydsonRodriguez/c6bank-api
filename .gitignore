@@ -1,0 +1,40 @@
+## Arquivos locais
+.claude/
+PROMPT-C6BANK-API.md
+error.docker.txt
+
+## .NET
+bin/
+obj/
+*.user
+*.suo
+.vs/
+_ReSharper*/
+*.DotSettings.user
+*.ncrunchsolution
+*.ncrunchproject
+TestResults/
+*.coverage
+*.coveragexml
+publish/
+*.pubxml
+*.pubxml.user
+launchSettings.json
+
+## Secrets
+appsettings.*.json
+!appsettings.Development.json
+secrets.json
+*.pfx
+*.p12
+*.pem
+
+## Docker
+.dockerignore
+
+## IDEs
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
