@@ -14,7 +14,7 @@ namespace C6BankIntegration.Infrastructure.ExternalServices.C6Bank;
 /// Cliente HTTP tipado para comunicação com a API do C6 Bank.
 /// Suporta mTLS, OAuth2 e headers padronizados.
 /// </summary>
-public sealed class C6BankHttpClient
+public class C6BankHttpClient
 {
     private readonly HttpClient _httpClient;
     private readonly C6BankSettings _settings;

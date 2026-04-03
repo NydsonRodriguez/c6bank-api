@@ -59,4 +59,11 @@ public sealed class Cpf : IEquatable<Cpf>
 
     /// <inheritdoc/>
     public override string ToString() => Value;
+
+    /// <summary>Compara dois CPFs por valor.</summary>
+    public static bool operator ==(Cpf? left, Cpf? right) =>
+        left is null ? right is null : left.Equals(right);
+
+    /// <summary>Compara dois CPFs por valor.</summary>
+    public static bool operator !=(Cpf? left, Cpf? right) => !(left == right);
 }

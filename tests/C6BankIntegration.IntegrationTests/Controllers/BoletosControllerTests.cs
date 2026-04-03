@@ -41,7 +41,7 @@ public sealed class BoletosControllerTests : IClassFixture<CustomWebApplicationF
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var content = await response.Content.ReadAsStringAsync();
-        content.Should().Contain("[]").Or.Contain("\"id\"");
+        (content.Contains("[]") || content.Contains("\"id\"")).Should().BeTrue();
     }
 
     [Fact]

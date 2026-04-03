@@ -4,7 +4,9 @@ using C6BankIntegration.Infrastructure.Logging;
 using C6BankIntegration.API.Middlewares;
 using C6BankIntegration.API.Extensions;
 using Asp.Versioning;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.RateLimiting;
+using System.Text.Json;
 using System.Threading.RateLimiting;
 using Serilog;
 
@@ -83,7 +85,19 @@ app.UseCors();
 app.UseRateLimiter();
 app.UseAuthorization();
 app.MapControllers();
-app.MapHealthChecks("/health");
+app.MapHealthChecks("/health", new HealthCheckOptions
+{
+    ResponseWriter = async (context, report) =>
+    {
+        context.Response.ContentType = "application/json";
+        var result = JsonSerializer.Serialize(new
+        {
+            status = report.Status.ToString(),
+            checks = report.Entries.Select(e => new { name = e.Key, status = e.Value.Status.ToString() })
+        });
+        await context.Response.WriteAsync(result);
+    }
+});
 
 app.UseSerilogRequestLogging();
 

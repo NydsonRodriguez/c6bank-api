@@ -103,5 +103,5 @@ public sealed class PixCharge : BaseEntity
     }
 
     private static string GenerateTxid() =>
-        Guid.NewGuid().ToString("N")[..35];
+        (Guid.NewGuid().ToString("N") + Guid.NewGuid().ToString("N"))[..35];
 }

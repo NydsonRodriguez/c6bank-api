@@ -6,6 +6,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Moq;
+using System.Net.Http;
 
 namespace C6BankIntegration.UnitTests.Infrastructure.Services;
 
@@ -21,7 +22,9 @@ public sealed class C6BankAuthServiceTests
     {
         _httpClientMock = new Mock<C6BankHttpClient>(
             MockBehavior.Loose,
-            null!, null!, null!);
+            new HttpClient(),
+            Options.Create(new C6BankSettings { ClientId = "x", ClientSecret = "y" }),
+            Mock.Of<ILogger<C6BankHttpClient>>());
 
         _memoryCache = new MemoryCache(new MemoryCacheOptions());
         _loggerMock = new Mock<ILogger<C6BankAuthService>>();
